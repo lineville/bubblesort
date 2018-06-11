@@ -1,5 +1,10 @@
 let sorter = {};
-sorter.bubbleSort = function bubbleSort(arr) {
+sorter.bubbleSort = function bubbleSort(arr, comparator) {
+  if (!comparator) {
+    comparator = function(a, b) {
+      return a > b;
+    };
+  }
   let len = arr.length;
   // for each element loop over it
   for (let sortedElements = 0; sortedElements < len; sortedElements++) {
@@ -9,7 +14,7 @@ sorter.bubbleSort = function bubbleSort(arr) {
       // then swap.
       let val = arr[j];
       let prev = arr[j - 1];
-      if (prev > val) {
+      if (comparator(prev, val)) {
         arr = sorter.swap(arr, j - 1, j);
       }
     }
@@ -23,3 +28,4 @@ sorter.swap = function swap(arr, a, b) {
   arr[b] = temp;
   return arr;
 };
+
